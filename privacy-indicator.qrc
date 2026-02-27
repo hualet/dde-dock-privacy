@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>resources/icons/camera.svg</file>
+        <file>resources/icons/microphone.svg</file>
+        <file>resources/icons/location.svg</file>
+    </qresource>
+</RCC>
