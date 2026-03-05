@@ -1,44 +1,32 @@
-cmake_minimum_required(VERSION 3.16)
+# SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-set(PLUGIN_NAME "privacy-indicator")
+cmake_minimum_required(VERSION 3.10)
 
-project(${PLUGIN_NAME})
-
-# 使用 Qt6（系统已安装）
-
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
-# 明确列出我们的源文件，不要使用 GLOB_RECURSE
-set(SRCS
-    privacyindicatorplugin.cpp
-    devicemonitor.cpp
-    privacywidget.cpp
+project(dock-privacyindicator)
+
+FILE(GLOB_RECURSE SRCS
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.json"
 )
 
-find_package(PkgConfig REQUIRED)
-find_package(Qt6 REQUIRED COMPONENTS Widgets Svg DBus)
-find_package(Dtk6Widget REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS LinguistTools DBus)
+find_package(DDEShell REQUIRED)
 
-add_definitions("-DQT_NO_DEBUG_OUTPUT")
-add_library(${PLUGIN_NAME} SHARED ${SRCS} privacy-indicator.qrc)
+add_library(dock-privacyindicator SHARED ${SRCS})
 
-set_target_properties(${PLUGIN_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ./)
-
-target_include_directories(${PLUGIN_NAME} PUBLIC
-    ${Dtk6Widget_INCLUDE_DIRS}
-    /usr/include/dde-dock
-)
-
-target_link_libraries(${PLUGIN_NAME} PRIVATE
-    ${Dtk6Widget_LIBRARIES}
-    Qt6::Widgets
-    Qt6::Svg
+target_link_libraries(dock-privacyindicator PRIVATE
+    Dde::Shell
     Qt6::DBus
 )
 
-set(CMAKE_INSTALL_PREFIX "/usr")
-
-install(TARGETS ${PLUGIN_NAME} LIBRARY DESTINATION lib/dde-dock/plugins)
-install(FILES privacy-indicator.json DESTINATION share/dde-dock/plugins/)
-install(DIRECTORY resources/ DESTINATION share/dde-dock/plugins/privacy-indicator/resources)
+ds_install_package(PACKAGE org.deepin.ds.dock.privacyindicator TARGET dock-privacyindicator)
+ds_handle_package_translation(PACKAGE org.deepin.ds.dock.privacyindicator)
