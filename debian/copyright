@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: dde-dock-privacy
-Source: https://github.com/linuxdeepin/dde-dock-privacy
+Upstream-Name: dde-shell-privacy-plugin
+Source: https://github.com/linuxdeepin/dde-shell-privacy-plugin
 
 Files: *
 Copyright: 2025 UnionTech Software Technology Co., Ltd.

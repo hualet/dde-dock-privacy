@@ -1,4 +1,4 @@
-# dde-dock-privacy
+# dde-shell-privacy-plugin
 
 Deepin 任务栏隐私指示器插件，用于显示当前正在被使用的隐私敏感设备。
 

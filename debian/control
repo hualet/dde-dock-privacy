@@ -1,4 +1,4 @@
-Source: dde-dock-privacy
+Source: dde-shell-privacy-plugin
 Section: utils
 Priority: optional
 Maintainer: Deepin Packages Builder <packages@deepin.org>
@@ -12,7 +12,7 @@ Build-Depends: debhelper (>= 11),
                libdde-shell-dev
 Standards-Version: 4.5.0
 
-Package: dde-dock-privacy
+Package: dde-shell-privacy-plugin
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
