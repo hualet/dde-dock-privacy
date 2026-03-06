@@ -14,18 +14,18 @@ jobs:
       options: --privileged
     
     steps:
-    - uses: actions/checkout@v4
-    
     - name: Install dependencies
       run: |
         apt-get update
         apt-get install -y clang-format git
+    
+    - uses: actions/checkout@v4
     
     - name: Check clang-format version
       run: clang-format --version
     
     - name: Check formatting
       run: |
-        git config --global --add safe.directory $(pwd)
         find . -name "*.cpp" -o -name "*.h" | xargs clang-format -i
+        git config --global --add safe.directory $(pwd)
         git diff --exit-code || (echo "Please run clang-format to fix formatting issues" && exit 1)
