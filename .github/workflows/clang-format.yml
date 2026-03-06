@@ -26,6 +26,6 @@ jobs:
     
     - name: Check formatting
       run: |
-        find . -name "*.cpp" -o -name "*.h" | xargs clang-format -i
+        find . -name "*.cpp" -o -name "*.h" | xargs clang-format -style=gnu -i
         git config --global --add safe.directory $(pwd)
         git diff --exit-code || (echo "Please run clang-format to fix formatting issues" && exit 1)
